@@ -1,0 +1,43 @@
+<div class="container d-flex justify-content-center my-2">
+  <form class="flex flex-column align-items-center border rounded w-[320px]" [formGroup]="form" (ngSubmit)="submit()">
+    <label class="mb-3">Add mark</label>
+    <div class="mb-3 w-100 form-floating">
+      <input
+        type="text"
+        maxlength="7"
+        placeholder=""
+        class='form-control'
+        (input)="validateX($event)"
+        (focusin)="errorService.clear()"
+        formControlName="xValue"
+        id="xValue">
+      <label for="xValue">{{xMessage}}</label>
+    </div>
+    <div class="mb-3 w-100 form-floating">
+      <input
+        type="text"
+        maxlength="7"
+        placeholder=""
+        class="form-control"
+        (input)="validateY($event)"
+        (focusin)="errorService.clear()"
+        formControlName="yValue"
+        id="yValue">
+      <label for="yValue">{{yMessage}}</label>
+    </div>
+    <div class="mb-3 w-100 form-floating">
+      <input
+        type="text"
+        placeholder=""
+        maxlength="3"
+        class="form-control"
+        (input)="validateR($event)"
+        (focusin)="errorService.clear()"
+        formControlName="rValue"
+        id="rValue">
+      <label for="rValue">{{rMessage}}</label>
+    </div>
+    <app-alert></app-alert>
+    <button type="submit" class="btn btn-primary w-[110px]">Submit</button>
+  </form>
+</div>

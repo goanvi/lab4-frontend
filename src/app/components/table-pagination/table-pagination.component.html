@@ -1,0 +1,42 @@
+<div class="border rounded">
+  <table class="table table-striped text-center">
+    <thead>
+    <tr>
+      <th class="px-sm-2 px-1" scope="col">X value</th>
+      <th class="px-sm-2 px-1" scope="col">Y value</th>
+      <th class="px-sm-2 px-1" scope="col">R value</th>
+      <th class="px-sm-2 px-1" scope="col">Hit</th>
+      <th class="px-sm-2 px-1" scope="col">Time</th>
+      <th class="px-sm-2 px-1" scope="col">Lead time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let mark of tableService.marks">
+      <td class="px-sm-2 px-0">{{ mark.xvalue}}</td>
+      <td class="px-sm-2 px-0">{{ mark.yvalue}}</td>
+      <td class="px-sm-2 px-0">{{ mark.rvalue}}</td>
+      <td class="px-sm-2 px-0" style="color:{{mark.hit == 'hit'?'green':'red'}}">{{mark.hit}}</td>
+      <td class="px-sm-2 px-0">{{ mark.time}}</td>
+      <td class="px-sm-2 px-0">{{ mark.leadTime?.toExponential(3)?.slice(0,5)}}ms</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-sm-between align-items-sm-start align-items-center p-sm-2 h-min flex-sm-row flex-column ">
+    <ngb-pagination
+      [collectionSize]="tableService.collectionSize"
+      [(page)]="tableService.page"
+      [pageSize]="tableService.pageSize"
+      (pageChange)="tableService.refreshMarks()"
+    >
+    </ngb-pagination>
+
+    <button type="button" class="btn  btn-primary h-min w-25 mb-2" (click)="tableService.clearTable()">Clear</button>
+
+    <select class="form-select h-min w-25"  [(ngModel)]="tableService.pageSize" (ngModelChange)="tableService.refreshMarks()">
+      <option [ngValue]="2">2 items</option>
+      <option [ngValue]="4">4 items</option>
+      <option [ngValue]="6">6 items</option>
+    </select>
+  </div>
+</div>

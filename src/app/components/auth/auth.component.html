@@ -1,0 +1,29 @@
+<div class="container flex flex-column align-items-center">
+  <form *ngIf="login" class="flex flex-column align-items-center border rounded w-25" [formGroup]=formLogin (ngSubmit)=signIn() >
+    <label class="mb-3">Sign in</label>
+    <div class="mb-3 w-100">
+      <input type="text" placeholder="Username" class="form-control"  formControlName="login" (focus)="errorService.clear()">
+    </div>
+    <div class="mb-3 w-100">
+      <input type="password" placeholder="Password" class="form-control"  formControlName="password" (focus)="errorService.clear()">
+    </div>
+    <app-alert></app-alert>
+    <button type="submit" class="btn btn-primary w-[110px]">Sign in</button>
+  </form>
+  <form *ngIf="!login" class="flex flex-column align-items-center border rounded w-25" [formGroup]=formRegister (ngSubmit)=signUp() >
+    <label class="mb-3">Sign up</label>
+    <div class="mb-3 w-100">
+      <input type="text" class="form-control" placeholder="Username" formControlName="username" (focusin)="errorService.clear()">
+    </div>
+    <div class="mb-3 w-100">
+      <input type="password" class="form-control" placeholder="Password" formControlName="password1" (focusin)="errorService.clear()">
+    </div>
+    <div class="mb-3 w-100">
+      <input type="password" placeholder="Password again"  [classList]="password2" formControlName="password2" (input)="comparePasswords()"  (focusin)="errorService.clear()">
+    </div>
+    <app-alert></app-alert>
+    <button type="submit" class="btn btn-primary w-[110px]">Sign up</button>
+  </form>
+  <button type="button" class="btn btn-link mt-2" (click)="switchForm()">{{login? 'Create an account':'Sign in'}}</button>
+</div>
+
